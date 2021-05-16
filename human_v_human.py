@@ -15,12 +15,9 @@ def main():
         if move is not None:
             print_move(game.next_player.other, move)
         print_board(game.board)
-        if game.next_player == Player.black:
-            human_move = input("-- ")
-            point = point_from_coords(human_move.strip())
-            move: Move = Move.play(point)
-        else:
-            move = bot.select_move(game)
+        move_input = input("-- ")
+        point = point_from_coords(move_input.strip())
+        move: Move = Move.play(point)
 
         game = game.apply_move(move)
 

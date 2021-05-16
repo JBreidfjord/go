@@ -18,9 +18,9 @@ def main():
         # Short sleep to make the game watchable
         time.sleep(0.3)
 
+        bot_move = bots[game.next_player].select_move(game)
         print(chr(27) + "[2J")  # Clear the screen
         print_board(game.board)
-        bot_move = bots[game.next_player].select_move(game)
         print_move(game.next_player, bot_move)
         game = game.apply_move(bot_move)
 
