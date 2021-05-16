@@ -23,4 +23,10 @@ def print_board(board: Board):
             stone = board.get(Point(row=row, col=col))
             line.append(STONE_TO_CHAR[stone])
         print(f"{bump}{row} {''.join(line)}")
-    print("  " + " ".join(COLS[: board.num_cols]))
+    print("    " + "  ".join(COLS[: board.num_cols]))
+
+
+def point_from_coords(coords: str):
+    col = COLS.index(coords[0].upper()) + 1
+    row = int(coords[1:])
+    return Point(row=row, col=col)
