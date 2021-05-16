@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import copy
-from typing import Union
 
 from dlgo.gotypes import Player, Point
 
