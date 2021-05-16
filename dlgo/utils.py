@@ -1,4 +1,4 @@
-from dlgo.goboard_slow import Board, Move
+from dlgo.goboard import Board, Move
 from dlgo.gotypes import Player, Point
 
 COLS = "ABCDEFGHIJKLMNOPQRST"
