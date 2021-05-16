@@ -1,13 +1,14 @@
-from dlgo.gotypes import Point
+from dlgo.goboard_slow import Board
+from dlgo.gotypes import Player, Point
 
 
-def is_point_an_eye(board, point, color):
+def is_point_an_eye(board: Board, point: Point, color: Player):
     if board.get(point) is not None:
         return False
     # All adjacent points must contain friendly stones
     for neighbor in point.neighbors():
         if board.is_on_grid(neighbor):
-            neighbor_color = board.get(neighbor)
+            neighbor_color: Player = board.get(neighbor)
             if neighbor_color != color:
                 return False
 
@@ -21,7 +22,7 @@ def is_point_an_eye(board, point, color):
     ]
     for corner in corners:
         if board.is_on_grid(corner):
-            corner_color = board.get(corner)
+            corner_color: Player = board.get(corner)
             if corner_color == color:
                 friendly_corners += 1
         else:

@@ -12,6 +12,9 @@ class Player(enum.Enum):
 
 
 class Point(namedtuple("Point", "row col")):
+    row: int
+    col: int
+
     def neighbors(self):
         return [
             Point(self.row - 1, self.col),
