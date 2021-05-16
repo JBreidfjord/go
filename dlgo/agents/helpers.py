@@ -1,4 +1,4 @@
-from dlgo.goboard_slow import Board
+from dlgo.goboard import Board
 from dlgo.gotypes import Player, Point
 
 
