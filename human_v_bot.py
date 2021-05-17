@@ -1,4 +1,5 @@
-from dlgo.agents.naive import RandomBot
+from dlgo.agents.helpers import capture_diff, current_score
+from dlgo.agents.naive import AlphaBetaBot, RandomBot
 from dlgo.goboard import GameState, Move
 from dlgo.gotypes import Player
 from dlgo.utils import point_from_coords, print_board, print_move
@@ -7,7 +8,7 @@ from dlgo.utils import point_from_coords, print_board, print_move
 def main():
     board_size = 9
     game = GameState.new_game(board_size)
-    bot = RandomBot()
+    bot = AlphaBetaBot(eval_fn=current_score)
 
     move = None
     while not game.is_over():
