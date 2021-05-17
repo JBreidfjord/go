@@ -3,22 +3,19 @@ import random
 from dlgo.agents.base import Agent
 from dlgo.agents.helpers import is_point_an_eye
 from dlgo.goboard import GameState, Move
-from dlgo.gotypes import Point
 
 
 class RandomBot(Agent):
     def select_move(self, game_state: GameState):
         """Chooses a random valid move. Will avoid closing its own eyes."""
         candidates = []
-        for r in range(1, game_state.board.num_rows + 1):
-            for c in range(1, game_state.board.num_cols + 1):
-                candidate = Point(row=r, col=c)
-                if game_state.is_valid_move(
-                    Move.play(candidate)
-                ) and not is_point_an_eye(
-                    game_state.board, candidate, game_state.next_player
-                ):
-                    candidates.append(candidate)
+        for move in game_state.legal_moves():
+            if move.is_pass or move.is_resign:
+                continue
+            if not is_point_an_eye(
+                game_state.board, move.point, game_state.next_player
+            ):
+                candidates.append(move)
 
         if not candidates:
             return Move.pass_turn()
