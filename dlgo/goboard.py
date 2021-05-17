@@ -4,6 +4,7 @@ import copy
 
 from dlgo import zobrist
 from dlgo.gotypes import Player, Point
+from dlgo.scoring import GameResult, compute_game_result
 
 
 class Move:
@@ -218,3 +219,20 @@ class GameState:
             and not self.is_move_self_capture(self.next_player, move)
             and not self.does_move_violate_ko(self.next_player, move)
         )
+
+    def legal_moves(self):
+        legal_moves: list[Move] = [Move.pass_turn(), Move.resign()]
+        for row in range(1, self.board.num_rows + 1):
+            for col in range(1, self.board.num_cols + 1):
+                move: Move = Move.play(Point(row=row, col=col))
+                if self.is_valid_move(move):
+                    legal_moves.append(move)
+        return legal_moves
+
+    def winner(self):
+        if not self.is_over():
+            return None
+        if self.last_move.is_resign:
+            return self.next_player
+        game_result: GameResult = compute_game_result(self)
+        return game_result.winner
