@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections import namedtuple
 
-from dlgo.goboard import Board, GameState
 from dlgo.gotypes import Player, Point
 
 
@@ -47,7 +46,7 @@ class GameResult(namedtuple("GameResult", "b w komi")):
         return f"W+{w - self.b}"
 
 
-def evaluate_territory(board: Board):
+def evaluate_territory(board):
     status = {}
     for row in range(1, board.num_rows + 1):
         for col in range(1, board.num_cols + 1):
@@ -70,7 +69,7 @@ def evaluate_territory(board: Board):
     return Territory(status)
 
 
-def _collect_region(start_pos: Point, board: Board, visited=None):
+def _collect_region(start_pos: Point, board, visited=None):
     if visited is None:
         visited = {}
     if start_pos in visited:
@@ -94,7 +93,7 @@ def _collect_region(start_pos: Point, board: Board, visited=None):
     return all_points, all_borders
 
 
-def compute_game_result(game_state: GameState):
+def compute_game_result(game_state):
     territory = evaluate_territory(game_state.board)
     return GameResult(
         territory.num_black_territory + territory.num_black_stones,
