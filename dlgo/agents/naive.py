@@ -19,4 +19,4 @@ class RandomBot(Agent):
 
         if not candidates:
             return Move.pass_turn()
-        return Move.play(random.choice(candidates))
+        return random.choice(candidates)
