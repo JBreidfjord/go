@@ -27,23 +27,23 @@ class Territory:
                 self.neutral_points.append(point)
 
 
-class GameResult(namedtuple("GameResult", "b w komi")):
+class GameResult(namedtuple("GameResult", "black white komi")):
     @property
     def winner(self):
-        if self.b > self.w + self.komi:
+        if self.black > self.white + self.komi:
             return Player.black
         return Player.white
 
     @property
-    def winning_margin(self):
-        w = self.w + self.komi
-        return abs(self.b - w)
+    def winning_margin(self) -> float:
+        w = self.white + self.komi
+        return abs(self.black - w)
 
     def __str__(self):
-        w = self.w + self.komi
-        if self.b > w:
-            return f"B+{self.b - w}"
-        return f"W+{w - self.b}"
+        w = self.white + self.komi
+        if self.black > w:
+            return f"B+{self.black - w}"
+        return f"W+{w - self.black}"
 
 
 def evaluate_territory(board):
