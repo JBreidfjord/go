@@ -1,6 +1,7 @@
 import time
 
 from dlgo.agents.helpers import capture_diff, current_score
+from dlgo.agents.monte_carlo import MonteBot
 from dlgo.agents.naive import AlphaBetaBot, RandomBot
 from dlgo.goboard import GameState
 from dlgo.gotypes import Player
@@ -12,7 +13,7 @@ def main():
     game = GameState.new_game(board_size)
     bots = {
         Player.black: AlphaBetaBot(eval_fn=capture_diff, depth=3),
-        Player.white: AlphaBetaBot(eval_fn=current_score, depth=3),
+        Player.white: MonteBot(temperature=1.5, max_search_rounds=10),
     }
 
     move = None
